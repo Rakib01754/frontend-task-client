@@ -16,14 +16,51 @@ const Login = () => {
         const password = form.password.value;
         signIn(email, password)
             .then(result => {
+
                 const user = result.user;
                 console.log(user)
+                saveUserToDb(email, password)
                 toast.success('Login Succesfull')
                 navigate('/')
             })
             .catch(error => {
                 const errorMessage = error.message;
                 toast.error(errorMessage)
+            })
+    }
+
+    const saveUserToDb = (email, password) => {
+        const loginData = {
+            email,
+            password,
+        }
+        console.log(loginData)
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ email }),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        // set localStorage
+                        localStorage.setItem('token', data.token)
+                    })
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                console.log(errorMessage)
             })
     }
     return (

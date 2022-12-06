@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FaArrowRight } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const RegisterThird = () => {
+    const navigate = useNavigate()
     const { userDetails, signUp } = useContext(AuthContext)
     const [passwordError, setPasswordError] = useState('')
-    console.log(userDetails)
+
     const handleFormSubmit = (e) => {
         setPasswordError('')
         e.preventDefault()
@@ -29,6 +30,8 @@ const RegisterThird = () => {
                 })
                     .then(() => {
                         // Profile updated!
+                        const date = new Date().toLocaleDateString()
+                        saveUserToDb(userDetails, password, date)
                         toast.success('Profile Updated')
                     }).catch((error) => {
                         // An error occurred
@@ -43,6 +46,46 @@ const RegisterThird = () => {
             })
         form.reset()
     }
+    const saveUserToDb = (userDetails, password, date) => {
+        const registerData = {
+            firstName: userDetails.firstName,
+            lastName: userDetails.lastName,
+            phone: userDetails.phone,
+            email: userDetails.email,
+            password,
+            date
+        }
+        fetch('http://localhost:5000/signup', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(registerData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: userDetails.email }),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        // set localStorage
+                        localStorage.setItem('token', data.token)
+                    })
+                navigate('/')
+                console.log(data)
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                console.log(errorMessage)
+            })
+    }
+
     return (
         <form onSubmit={handleFormSubmit} className="flex flex-col pt-3 md:pt-8">
             <div className="flex flex-col pt-4">
@@ -57,7 +100,6 @@ const RegisterThird = () => {
                     <span className='flex items-center justify-center'> Sign Up <FaArrowRight className='ml-3' /></span>
                 </button>
             </div>
-
         </form>
     );
 };

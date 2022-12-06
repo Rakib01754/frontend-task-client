@@ -5,23 +5,26 @@ import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 
 const RegisterFirst = () => {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const { setFullName } = useContext(AuthContext)
+    const { setFirstName, setLastName } = useContext(AuthContext)
+    const [firstName, setFirstNameFromInput] = useState('')
+    const [lastName, setLastNamFromInput] = useState('')
 
-    const fullName = `${firstName} ${lastName}`
-    setFullName(fullName)
+
+
+    setFirstName(firstName)
+    setLastName(lastName)
+
     return (
         <div className="flex flex-col pt-3 md:pt-8">
             <div className="flex flex-col pt-4">
                 <div className="flex relative ">
-                    <input type="text" onChange={(e) => setFirstName(e.target.value)} name='firstName' className="flex-1 appearance-none border-b-2 border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Write First Name" />
+                    <input type="text" onChange={(e) => setFirstNameFromInput(e.target.value)} name='firstName' className="flex-1 appearance-none border-b-2 border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Write First Name" />
                 </div>
             </div>
             <div className="flex flex-col pt-4 mb-12">
                 <div className="flex relative ">
 
-                    <input type="text" onChange={(e) => setLastName(e.target.value)} name='lastName' className="flex-1 appearance-none border-b-2 border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Write Last Name" />
+                    <input type="text" onChange={(e) => setLastNamFromInput(e.target.value)} name='lastName' className="flex-1 appearance-none border-b-2 border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Write Last Name" />
                 </div>
             </div>
             {

@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Attendacne from '../Pages/Attendance/Attendacne';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
+import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import RegisterFirst from '../Pages/Register/RegisterFirst/RegisterFirst';
@@ -18,6 +19,10 @@ const Routes = () => {
             children: [
                 {
                     path: '/',
+                    element: <Home></Home>
+                },
+                {
+                    path: 'attendance',
                     element: <Attendacne></Attendacne>
                 },
                 {

@@ -10,11 +10,12 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const [fullName, setFullName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
 
-    const userDetails = { fullName, email, phone }
+    const userDetails = { firstName, lastName, email, phone }
 
     // email password register
     const signUp = (email, password) => {
@@ -59,7 +60,8 @@ const AuthProvider = ({ children }) => {
         loading,
         signUp,
         signIn,
-        setFullName,
+        setFirstName,
+        setLastName,
         setEmail,
         setPhone,
         userDetails,
