@@ -8,7 +8,7 @@ const Home = () => {
             >
                 <div className="mx-auto max-w-xl text-center">
                     <h1 className="text-3xl font-extrabold sm:text-5xl">
-                        Welcome To Ultimate,
+                        Welcome To Ultimate, <br />
                         <strong className="font-bold text-red-700 text-2xl sm:block">
                             Human Resource Management System.
                         </strong>
