@@ -55,7 +55,7 @@ const RegisterThird = () => {
             password,
             date
         }
-        fetch('http://localhost:5000/signup', {
+        fetch('https://server-seven-kappa-72.vercel.app/signup', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -64,7 +64,7 @@ const RegisterThird = () => {
         })
             .then(res => res.json())
             .then(data => {
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://server-seven-kappa-72.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

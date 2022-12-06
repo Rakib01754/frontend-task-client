@@ -5,7 +5,7 @@ const Attendacne = () => {
     const [userData, setUserData] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/test`, {
+        fetch(`https://server-seven-kappa-72.vercel.app/test`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("token")}`,
             },

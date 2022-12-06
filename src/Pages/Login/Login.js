@@ -35,7 +35,7 @@ const Login = () => {
             password,
         }
         console.log(loginData)
-        fetch('http://localhost:5000/login', {
+        fetch('https://server-seven-kappa-72.vercel.app/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -44,7 +44,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://server-seven-kappa-72.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
